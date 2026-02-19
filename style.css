@@ -264,22 +264,24 @@ html {
             background-color: var(--accent-color);
         }
 
-        /* Нова сітка для карток */
+        /* Нова сітка для карток (Змінено на Flexbox) */
         .services-grid-modern {
-            display: grid;
-            /* Автоматично підлаштовує колонки. Мінімум 240px, максимум 1fr */
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
+            display: flex;
+            flex-wrap: wrap; /* Дозволяє переносити картки на новий ряд */
             gap: 25px;
         }
 
         /* Дизайн самої картки послуги */
         .service-item-card {
+            /* НОВА МАГІЯ: flex-grow дозволяє карткам тягнутися на все вільне місце */
+            flex: 1 1 240px; 
+            
             display: flex;
             flex-direction: column;
             background: var(--white);
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-            overflow: hidden; /* Щоб картинка не вилазила за зкруглені кути */
+            overflow: hidden;
             text-decoration: none;
             color: var(--text-color);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -330,13 +332,82 @@ html {
         /* Адаптація для телефонів */
         @media (max-width: 768px) {
             .services-grid-modern {
-                /* На мобільних робимо по 1 картці в ряд, або можна змінити minmax(150px) для 2 карток */
-                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
                 gap: 20px;
+                /* Ми видалили звідси grid-правила, бо Flexbox тепер сам ідеально все адаптує */
             }
             .category-title {
                 font-size: 22px;
             }
+        }
+        /* --- 5.5 ADVANTAGES SECTION --- */
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .advantage-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid #eee;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Декоративна лінія зліва, яка з'являється при наведенні */
+        .advantage-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--accent-color);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            transform-origin: bottom;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: transparent;
+        }
+
+        .advantage-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .adv-icon {
+            font-size: 45px;
+            margin-bottom: 20px;
+            display: inline-block;
+            line-height: 1;
+            background: rgba(0, 86, 179, 0.05);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .advantage-card h3 {
+            font-size: 19px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .advantage-card p {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 0;
         }
 
         /* --- 6. DOWNLOADS SECTION (КАРТКИ) --- */
