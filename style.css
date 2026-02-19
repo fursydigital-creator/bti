@@ -233,24 +233,111 @@ html {
         }
 
 
-        /* --- 5. SERVICES GRID --- */
+        /* --- 5. SERVICES GRID (ОНОВЛЕНО: КАТЕГОРІЇ ТА КАРТИНКИ) --- */
         .section-title { text-align: center; margin-bottom: 40px; }
         .section-title h2 { font-size: 32px; color: var(--primary-color); margin-bottom: 10px; }
-
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(2    0px, 1fr)); gap: 25px; }
-        .service-card {
-            background: var(--white); 
-            padding: 30px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow); 
-            transition: transform 0.3s; 
-            text-align: center;
-            border-top: 4px solid var(--primary-color);
+        
+        .service-category {
+            margin-bottom: 50px;
         }
-        .service-card:hover { transform: translateY(-5px); }
-        .service-icon { font-size: 40px; margin-bottom: 15px; color: var(--primary-color); }
-        .service-card h3 { margin-bottom: 10px; font-size: 20px; }
-        .service-card p { font-size: 15px; color: #666; margin-bottom: 0; }
+
+        /* Заголовок підкатегорії (наприклад, "Технічний паспорт") */
+        .category-title {
+            font-size: 24px;
+            color: var(--secondary-color);
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(0, 86, 179, 0.1);
+            position: relative;
+            text-align: center;
+        }
+
+        /* Декоративна лінія під заголовком категорії */
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        /* Нова сітка для карток */
+        .services-grid-modern {
+            display: grid;
+            /* Автоматично підлаштовує колонки. Мінімум 240px, максимум 1fr */
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
+            gap: 25px;
+        }
+
+        /* Дизайн самої картки послуги */
+        .service-item-card {
+            display: flex;
+            flex-direction: column;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+            overflow: hidden; /* Щоб картинка не вилазила за зкруглені кути */
+            text-decoration: none;
+            color: var(--text-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .service-item-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+            border-color: rgba(0, 86, 179, 0.2);
+        }
+
+        /* Зображення всередині картки */
+        .service-item-img {
+            width: 100%;
+            height: 160px; /* Фіксована висота для всіх картинок */
+            object-fit: cover; /* Заповнює область, не сплющуючи картинку */
+            border-bottom: 3px solid var(--accent-color); /* Жовта смужка для акценту */
+            transition: transform 0.5s ease;
+        }
+
+        /* Легкий зум картинки при наведенні на картку */
+        .service-item-card:hover .service-item-img {
+            transform: scale(1.05);
+        }
+
+        /* Текст під картинкою */
+        .service-item-text {
+            padding: 20px 15px;
+            font-size: 15px;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.4;
+            flex-grow: 1; /* Змушує текст займати весь вільний простір, вирівнюючи картки */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--white);
+            position: relative; /* Важливо для z-index, щоб перекрити scale картинки */
+            z-index: 2;
+            transition: color 0.3s;
+        }
+
+        .service-item-card:hover .service-item-text {
+            color: var(--primary-color);
+        }
+
+        /* Адаптація для телефонів */
+        @media (max-width: 768px) {
+            .services-grid-modern {
+                /* На мобільних робимо по 1 картці в ряд, або можна змінити minmax(150px) для 2 карток */
+                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+                gap: 20px;
+            }
+            .category-title {
+                font-size: 22px;
+            }
+        }
 
         /* --- 6. DOWNLOADS SECTION (КАРТКИ) --- */
         .bg-light { background-color: #f8f9fa; } /* Трохи сірий фон для контрасту */
@@ -506,4 +593,195 @@ html {
             .nav-links.mobile-menu-open a:nth-child(3) { transition-delay: 0.2s; }
             .nav-links.mobile-menu-open a:nth-child(4) { transition-delay: 0.25s; }
             .nav-links.mobile-menu-open a:nth-child(5) { transition-delay: 0.3s; }
+        }
+/* ==========================================================
+           СТИЛІ ДЛЯ ВНУТРІШНІХ СТОРІНОК (Сторнінки послуг)
+        ========================================================== */
+        
+        /* Коротка шапка (Hero) для внутрішніх сторінок */
+        .page-header {
+            background: linear-gradient(135deg, rgba(14, 75, 143, 0.95), rgba(0, 50, 120, 0.95)), url('https://images.unsplash.com/photo-1554469384-e58fac16e23a?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 50px 0;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        /* Хлібні крихти (Навігація) */
+        .breadcrumbs {
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+        }
+        .breadcrumbs a { color: white; font-weight: 500; text-decoration: underline; }
+        .breadcrumbs a:hover { color: var(--accent-color); }
+        .breadcrumbs .separator { margin: 0 10px; color: rgba(255,255,255,0.5); }
+
+        /* Сітка сторінки послуги (Main + Sidebar) */
+        .service-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* Ліва колонка більша (2 частини), права менша (1 частина) */
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* --- ЛІВА КОЛОНКА --- */
+        
+        .content-title {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin: 35px 0 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        /* Блок переваг (Іконки в ряд) */
+        .benefits-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.4;
+        }
+        .benefit-icon { font-size: 32px; }
+
+        /* Сучасна таблиця цін */
+        .table-responsive {
+            overflow-x: auto;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        .pricing-table th, .pricing-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .pricing-table th {
+            background-color: #f8f9fa;
+            color: var(--secondary-color);
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .pricing-table tr:hover { background-color: #fcfcfc; }
+        .pricing-table td strong { color: var(--primary-color); font-size: 18px; }
+
+        /* Список "Що входить у пакет" */
+        .package-list { list-style: none; padding: 0; }
+        .package-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .check-green {
+            width: 24px; height: 24px;
+            color: #28a745; /* Зелений колір успіху */
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Текстовий блок */
+        .info-block {
+            background-color: rgba(0, 86, 179, 0.05);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            margin-top: 30px;
+            font-size: 16px;
+            color: #444;
+        }
+        .info-block p:not(:last-child) { margin-bottom: 10px; }
+
+
+        /* --- ПРАВА КОЛОНКА (Сайдбар) --- */
+        
+        .service-sidebar {
+            position: sticky;
+            top: 90px; /* Прилипає до верху при скролі */
+        }
+        
+        .sidebar-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        .sidebar-card h3 {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        /* Чекліст документів */
+        .doc-checklist { list-style: none; padding: 0; }
+        .doc-checklist li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #444;
+            line-height: 1.5;
+        }
+        .doc-checklist li::before {
+            content: '•';
+            position: absolute;
+            left: 0; top: -2px;
+            font-size: 24px;
+            color: var(--accent-color);
+        }
+        .doc-checklist li span { color: #888; font-size: 13px; }
+
+        /* Месенджери */
+        .contact-action-card p { font-size: 14px; color: #666; margin-bottom: 20px; }
+        .messenger-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        
+        .msg-btn {
+            display: flex; justify-content: center; align-items: center; gap: 8px;
+            padding: 12px; border-radius: 6px;
+            color: white; font-weight: 600; font-size: 14px;
+            transition: 0.3s;
+        }
+        .msg-btn svg { width: 20px; height: 20px; }
+        
+        .msg-btn.telegram { background-color: #0088cc; }
+        .msg-btn.telegram:hover { background-color: #0077b3; }
+        
+        .msg-btn.viber { background-color: #7360f2; }
+        .msg-btn.viber:hover { background-color: #5c4cd9; }
+
+        /* --- АДАПТИВНІСТЬ ДЛЯ ВНУТРІШНЬОЇ СТОРІНКИ --- */
+        @media (max-width: 992px) {
+            .service-layout { grid-template-columns: 1fr; } /* Одна колонка на планшетах і телефонах */
+            .service-sidebar { position: static; } /* Вимикаємо sticky на мобільному */
+        }
+        @media (max-width: 768px) {
+            .benefits-row { grid-template-columns: 1fr; gap: 15px; } /* Переваги в стовпчик */
+            .page-header h1 { font-size: 28px; }
+            .messenger-links { grid-template-columns: 1fr; } /* Кнопки месенджерів одна під одною */
         }
