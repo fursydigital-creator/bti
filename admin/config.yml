@@ -1,0 +1,17 @@
+backend:
+  name: git-gateway
+  branch: main # Увага: якщо ваша головна гілка в Git називається master, напишіть master
+
+media_folder: "images" # Папка, куди CMS буде вантажити нові картинки
+public_folder: "/images"
+
+collections:
+  - name: "pages"
+    label: "Сторінки"
+    files:
+      - label: "Головна сторінка"
+        name: "home"
+        file: "content/home.md" # Сюди CMS буде зберігати ваш текст
+        fields:
+          - {label: "Головний заголовок", name: "title", widget: "string"}
+          - {label: "Опис сайту", name: "body", widget: "markdown"}
