@@ -576,7 +576,7 @@ html {
 
             /* СТАН: ВІДКРИТО */
             .nav-links.mobile-menu-open {
-                max-height: 470px; /* Достатньо, щоб вмістити всі пункти */
+                max-height: 100vh; /* Достатньо, щоб вмістити всі пункти */
                 opacity: 1;
                 transform: translateY(0);
             }
@@ -687,6 +687,11 @@ html {
         }
         .pricing-table tr:hover { background-color: #fcfcfc; }
         .pricing-table td strong { color: var(--primary-color); font-size: 18px; }
+        /* ДОДАТИ СЮДИ: */
+        .pricing-table td:last-child,
+        .pricing-table th:last-child {
+            white-space: nowrap; 
+        }
 
         /* Список "Що входить у пакет" */
         .package-list { list-style: none; padding: 0; }
